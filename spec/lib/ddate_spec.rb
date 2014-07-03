@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+=begin
+
 describe Ddate do
 
   [1970, 2014].each do |year|
@@ -65,3 +67,5 @@ describe Ddate do
     expect(ddate.to_s).to eq("Bureflux, Setting Orange, Bureaucracy, 50th, 3161 YOLD")
   end
 end
+
+=end

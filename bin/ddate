@@ -1,4 +1,10 @@
 #!/usr/bin/env ruby
-$:.unshift(File.expand_path('../lib', __FILE__)
+$:.unshift(File.expand_path('../lib', __FILE__))
 require 'ddate'
-Ddate::CLI.instance.main(ARGV)
+runner = Ddate::CLI.new
+begin
+  puts runner.run(ARGV)
+rescue DdateException => e
+  STDERR.puts "Error: #{e}"
+  STDERR.puts Ddate::USAGE
+end

@@ -1,71 +1,62 @@
+require 'singleton'
+
 module Ddate
   class CLI
-    include Singleton
 
-    def main(args, stdout=STDOUT, stderr=STDERR)
+    FORMAT_RE = %r{\A\+(.*)\z}
+    OPTION_RE = %r{\A\-(\S)\z}
 
-      @formats = Ddate::Formatter.new
+    attr_accessor :formatter
 
-      begin
-
-        num_args = args.count
-        case num_args
-        when 0
-          # no arguments, run with today's date
-          today = Date.today
-          year, month, day = today.year, today.month, today.day
-        when 1
-          raise DdateException.new "not enough arguments" unless check_arg(args.first)
-        when 3
-          year, month, day = args.map { |i| Integer(i) }
-        when 4
-          fmt = args.shift.to_s
-          if fmt[0] == "+"
-            @formats = Ddate::Formatter.new(fmt)
-          else
-            raise DdateException.new "first argument when 4 given must be a format"
-          end
-          year, month, day = args.map { |i| Integer(i) }
-        else
-          raise DdateException.new "wrong number of arguments"
-        end
-        puts Ddate::Converter.new(year, month, day, @formats[:standard], @formats[:sttibs])
-
-      rescue DdateException => e
-        STDERR.puts "#{e.class.name}: #{e}"
-        STDERR.puts Ddate::Usage
-      end
-
+    def initialize
+      self.formatter = Ddate::Formatter.new
     end
 
-    def check_arg(arg)
-      arg = arg.to_s
-      if arg.size < 1
-        raise DdateException.new "invalid first argument"
-      elsif arg[0] == "+"
-        @formats = Ddate::Formatter.new(arg)
-        return true
-      elsif arg1[0] == '-'
-        handle_options(arg1)
-        return true
+    def run(args)
+
+      num_args = args.count
+      case num_args
+      when 0
+        # no arguments, run with today's date
+        today = Date.today
+        year, month, day = today.year, today.month, today.day
+      when 1
+        arg = args.shift.to_s
+        if (help = arg.to_s.match(OPTION_RE) {|m| handle_options($1)})
+          return help
+        elsif (self.formatter = arg.to_s.match(FORMAT_RE) {|m| Ddate::Formatter.new($1)})
+          # do nothing, drop through
+        else
+          raise DdateException.new "not enough arguments"
+        end
+        today = Date.today
+        year, month, day = today.year, today.month, today.day
+      when 3
+        day, month, year = args.map { |i| Integer(i) }
+      when 4
+        fmt = args.shift.to_s
+        if (self.formatter = fmt.match(FORMAT_RE) {|m| Ddate::Formatter.new($1)})
+          # do nothing, drop through
+        else
+          raise DdateException.new "first argument when 4 given must be a format"
+        end
+        day, month, year = args.map { |i| Integer(i) }
+      else
+        raise DdateException.new "wrong number of arguments"
       end
-      return false
+      Ddate::Converter.new(year, month, day, formatter).to_s
     end
 
-    def handle_options(arg)
-      arg.to_s.split('').each do |c|
-        next if c = '-'
-
-        case c.downcase
-        when 'h'
-          STDERR.puts Ddate::Usage
-        when 'f'
-          STDERR.puts Ddate::Formatter::USAGE
-        when 'v'
-          STDERR.puts Ddate::VERSION_STRING
-        else
-          raise DdateException.new "unknown option: #{c}"
-        end
+    def handle_options(option)
+      case option.downcase
+      when 'h'
+        Ddate::USAGE
+      when 'f'
+        Ddate::FORMATTER_USAGE
+      when 'v'
+        Ddate::VERSION_STRING
+      else
+        raise DdateException.new "unknown option: #{option}"
       end
     end
 
