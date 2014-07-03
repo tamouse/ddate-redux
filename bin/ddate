@@ -5,7 +5,12 @@ require 'ddate'
 runner = Ddate::CLI.new
 begin
   puts runner.run(ARGV)
-rescue DdateException => e
-  STDERR.puts "Error: #{e}"
-  STDERR.puts Ddate::USAGE
+rescue Exception => e
+  case e
+  when DdateException, ArgumentError
+    STDERR.puts "#{e.class}: #{e}"
+    STDERR.puts Ddate::USAGE
+  else
+    raise e
+  end
 end
