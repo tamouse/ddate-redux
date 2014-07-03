@@ -23,7 +23,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Try:
+
+    $ ddate -h
+
+Otherwise the command line is basically the same as the old ddate(1) program:
+
+    $ ddate [ -h | -f | -v ] [+format] [day month year]
+
+Use `-f` to see the formatting options.
 
 ## Contributing
 
@@ -37,4 +45,5 @@ TODO: Write usage instructions here
 
 * [Discordian Calendar](https://en.wikipedia.org/wiki/Discordian_calendar) at wikipedia.
 * [Principia Discordia Calendar Converter](http://principiadiscordia.com/book/41.php)
+* [C implementation of ddate(1)](https://github.com/bo0ts/ddate)
 
