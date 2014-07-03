@@ -30,7 +30,7 @@ module Ddate
       expect(ddate.day).to eq(57)
       expect(ddate.season).to eq(2)
       expect(ddate.leapyear?).to eq(true)
-      expect(ddate.to_s).to eq("Pungenday, Confusion the 58th, YOLD 3138.")
+      expect(ddate.to_s).to eq("Prickle-Prickle, Confusion the 58th, YOLD 3138.")
     end
 
     it "should convert 1993-12-31" do
@@ -38,7 +38,7 @@ module Ddate
       expect(ddate.year).to eq(1993+1166)
       expect(ddate.day).to eq(72)
       expect(ddate.season).to eq(4)
-      expect(ddate.to_s).to eq("Pungenday, The Aftermath the 73rd, YOLD 3159.")
+      expect(ddate.to_s).to eq("Setting Orange, The Aftermath the 73rd, YOLD 3159.")
     end
 
     it "should get st. tib's day right" do
@@ -63,12 +63,12 @@ module Ddate
       expect(ddate.year).to eq(2012+1166)
       expect(ddate.day).to eq(72)
       expect(ddate.season).to eq(4)
-      expect(ddate.to_s).to eq("Pungenday, The Aftermath the 73rd, YOLD 3178.")
+      expect(ddate.to_s).to eq("Setting Orange, The Aftermath the 73rd, YOLD 3178.")
     end
 
     it "should get season holiday right" do
       ddate = Ddate::Converter.new(1995, 9, 26)
-      expect(ddate.to_s).to eq("Setting Orange, Bureaucracy the 50th, YOLD 3161. Celebrate Bureflux!")
+      expect(ddate.to_s).to eq("Prickle-Prickle, Bureaucracy the 50th, YOLD 3161. Celebrate Bureflux!")
     end
 
     it 'should get saint day right' do

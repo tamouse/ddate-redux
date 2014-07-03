@@ -68,10 +68,8 @@ module Ddate
     end
 
     def convert
-      self.yday = date.yday - 1
-
       self.year = DY(date.year)
-      self.day = yday
+      self.day = date.yday - 1
 
       if leapyear?
         if day == 59
@@ -79,9 +77,9 @@ module Ddate
         elsif day > 59
           self.day = day - 1
         end
-        self.yday = day
       end
 
+      self.yday = day
       self.season = 0
       unless day == :st_tibs
         while (day >= DAYS_PER_SEASON) do
@@ -134,7 +132,7 @@ module Ddate
     end
 
     def weekday
-      day % 5
+      yday % 5
     end
 
     def dayname
