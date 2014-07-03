@@ -1,7 +1,8 @@
-require "ddate/version"
+require 'ddate/version'
+require 'ddate/strings'
+require 'ddate/converter'
+require 'ddate/formatter'
+require 'ddate/cli'
+require 'active_support/core_ext/integer/inflections'
 
-module Ddate
-  def self.run
-    puts "Running"
-  end
-end
+class DdateException < StandardError; end

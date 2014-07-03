@@ -4,10 +4,10 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'ddate/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ddate"
+  spec.name          = Ddate::PACKAGE
   spec.version       = Ddate::VERSION
-  spec.authors       = ["Tamara Temple"]
-  spec.email         = ["tamouse@gmail.com"]
+  spec.authors       = Ddate::AUTHORS
+  spec.email         = Ddate::EMAILS
   spec.summary       = %q{discordian date, in ruby}
   spec.description   = %q{reimplement the ddate unix command, in ruby}
   spec.homepage      = ""
@@ -27,4 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "awesome_print"
+
+  spec.add_dependency "activesupport"
 end

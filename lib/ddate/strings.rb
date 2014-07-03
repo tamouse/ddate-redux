@@ -1,19 +1,24 @@
 module Ddate
 
   YOLD_BASE = 1970
+  YOLD_OFFSET = 1166
+  CALENDAR_DAYS_PER_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-  # Week is 5 days
+  DAYS_PER_WEEK = 5
   DAYS_LONG     = %w[Sweetmorn Boomtime Pungenday Prickle-Prickle Setting\ Orange]
   DAYS_SHORT    = %w[SM BT PD PP SO]
 
-  # Season are 73 days, 5 per 365 year
+  # Season are 73 days, 4 per 365 year
+  DAYS_PER_SEASON = 73
   SEASONS_LONG  = %w[Chaos Discord Confusion Bureaucracy The\ Aftermath]
   SEASONS_SHORT = %w[Chs Dsc Cfn Bcy Afm]
 
+  APOSTLE_HOLIDAY  = 4
   APOSTLE_HOLIDAYS = %w[Mungday Mojoday Syaday Zaraday Maladay] # fifth of season
+  SEASON_HOLIDAY   = 49
   SEASON_HOLIDAYS  = %w[Choaflux Discoflux Confuflux Bureflux Afflux] # 50th of season
 
-  ST_TIB_DAY = "St. Tib's Day" # once every 4 years, inserted between 50 and 60 Season of Chaos
+  ST_TIB_DAY = "Feast of St. Tib's Day" # once every 4 years, inserted between 59 and 60 Season of Chaos
 
   EXCLAMATIONS  = [
       'Hail Eris!',
@@ -44,9 +49,9 @@ module Ddate
       'This Fruit is not the True Fruit of Discord.',
   ]
 
-  DEFAULT_SHORT_FMT = ->(dayname, monthname, day, year) {"#{dayname} #{monthname} #{day}, #{year} YOLD"}
-  DEFAULT_LONG_FMT  = ->(dayname, dayeth, monthname, year) {
-    "Today is #{dayname}, the #{dayeth} day of #{monthname} in the YOLD #{year}. Celebrate #{holiday}!"
+  DEFAULT_FORMATTER = {
+      :standard => ->(year, dayname, seasonname, day, dayth, holiday, exclaim) {"#{holiday.nil? ? "" : "#{holiday}, "}#{dayname}, #{seasonname}, #{dayth}, #{year} YOLD"},
+      :sttibs   => ->(year, dayname, seasonname, day, dayth, holiday, exclaim) {"#{ST_TIB_DAY}, #{year} YOLD"}
   }
 
 end
