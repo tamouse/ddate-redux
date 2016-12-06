@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 module Ddate
-  VERSION = '2.0.0'
+  VERSION = '2.0.1'
 
   AUTHORS = ['Tamara Temple']
   EMAILS  = ['tamouse@gmail.com']
