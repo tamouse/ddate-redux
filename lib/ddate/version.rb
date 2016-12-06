@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 module Ddate
-  VERSION = '1.1.0'
+  VERSION = '2.0.0'
 
   AUTHORS = ['Tamara Temple']
   EMAILS  = ['tamouse@gmail.com']
@@ -10,7 +10,7 @@ module Ddate
   PACKAGE = 'ddate-redux'
   PROGNAME = File.basename($0)
   VERSION_STRING = "#{PROGNAME}: #{PACKAGE} #{VERSION}"
-  USAGE = "Usage: #{PROGNAME} [ -h | -v ] [+format] [day month year]"
+  USAGE = "Usage: #{PROGNAME} [ -h | -v ] [+format] [year month day]"
   FORMATTER_USAGE = %q[
 
 Format strings work just like the old ddate(1) program:
@@ -60,11 +60,11 @@ Examples:
        % ddate +’Today is %{%A, the %e of %B%}, %Y. %N%nCelebrate %H’
        Today is Sweetmorn, the 42nd of Bureaucracy, 3161.
 
-       % ddate +"It’s %{%A, the %e of %B%}, %Y. %N%nCelebrate %H" 26 9 1995
+       % ddate +"It’s %{%A, the %e of %B%}, %Y. %N%nCelebrate %H" 1995 9 26
        It’s Prickle-Prickle, the 50th of Bureaucracy, 3161.
        Celebrate Bureflux
 
-       % ddate +"Today’s %{%A, the %e of %B%}, %Y. %N%nCelebrate %H" 29 2 1996
+       % ddate +"Today’s %{%A, the %e of %B%}, %Y. %N%nCelebrate %H" 1996 2 29
        Today’s St. Tib’s Day, 3162.
 
   ]

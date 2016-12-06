@@ -32,7 +32,7 @@ module Ddate
         today = Date.today
         year, month, day = today.year, today.month, today.day
       when 3
-        day, month, year = args.map { |i| Integer(i) }
+        year, month, day = args.map { |i| Integer(i) }
       when 4
         fmt = args.shift.to_s
         if (self.formatter = fmt.match(FORMAT_RE) {|m| Ddate::Formatter.new($1)})
@@ -40,7 +40,7 @@ module Ddate
         else
           raise DdateException.new "first argument when 4 given must be a format"
         end
-        day, month, year = args.map { |i| Integer(i) }
+        year, month, day = args.map { |i| Integer(i) }
       else
         raise DdateException.new "wrong number of arguments"
       end

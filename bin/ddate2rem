@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+# Convert ddate into form for remind program
+
+# Usage: ddate2rem START END
+#
+#   START: start date in ISO8601 format
+#   END: end date in ISO8601 format
+
+require 'ddate'
+require 'date'
+
+start_date = Date.parse(ARGV[0])
+end_date = Date.parse(ARGV[1])
+
+current_date = start_date
+
+ddates = []
+
+while (current_date <= end_date) do
+  dd = Ddate::Converter.new(current_date.year, current_date.month, current_date.day)
+  ddates.push("REM %s MSG %s %%" % [
+      current_date.strftime("%b %d %Y"),
+      dd.to_s
+    ])
+  current_date = current_date + 1
+end
+
+
+ddates.each do |dd|
+  puts dd
+end
