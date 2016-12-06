@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = Ddate::EMAILS
   spec.summary       = %q{discordian date, in ruby}
   spec.description   = %q{reimplement the ddate unix command, in ruby}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/tamouse/ddate-redux"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
